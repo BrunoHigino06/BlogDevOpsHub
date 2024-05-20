@@ -1,13 +1,20 @@
 locals {
-  base_name = basename(get_terraform_module_path())
+  full_module_path = get_terragrunt_dir()
+  dir_name = basename(local.full_module_path)
 }
 
-# Configuração de backend para armazenar o tfstate no bucket S3
-terraform {
-  backend "s3" {
-    bucket         = "terraform-${timestamp()}"
-    key            = "${local.base_name}/terraform.tfstate"
-    region         = "us-east-1"  # Altere para a região apropriada
+
+remote_state {
+  backend = "s3"
+  generate = {
+    path      = "provider.tf"
+    if_exists = "overwrite_terragrunt"
+  }
+  config = {
+    bucket = "terraform-all-tfstates"
+    key = "${local.dir_name}/terraform.tfstate"
+    region         = "us-east-1"
     encrypt        = true
+
   }
 }
