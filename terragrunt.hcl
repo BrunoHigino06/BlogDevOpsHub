@@ -11,7 +11,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket = "terraform-all-tfstates"
+    bucket = "terraform-all-tfstates-${formatdate("YYYY-MM-DD-HH-mm-ss", timestamp())}"
     key = "${local.dir_name}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true

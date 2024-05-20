@@ -17,7 +17,6 @@
   variable "subnet" {
     type                                             = list(object({
       name                                           = string
-      vpc_name                                       = optional(string)
       cidr_block                                     = optional(string)
       availability_zone                              = optional(string)
       }))
