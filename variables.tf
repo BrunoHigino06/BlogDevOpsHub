@@ -46,3 +46,27 @@
     }))
     description = "security groups"
   }
+
+# netowork ACL vars
+variable "network_acl" {
+  type            = list(object({
+    name          = string
+    subnet_name   = list(string)
+    egress        = list(object({
+      protocol    = string 
+      rule_no     = string
+      action      = string
+      cidr_block  = string
+      from_port   = string
+      to_port     = string
+    }))
+    ingress       = list(object({
+      protocol    = string 
+      rule_no     = string
+      action      = string
+      cidr_block  = string
+      from_port   = string
+      to_port     = string
+    }))
+  }))
+}
