@@ -213,3 +213,24 @@
       ]
     } 
   ]
+
+# Internet Gateway inputs
+  internet_gateway  = [ 
+    {
+      name          = "IGW"
+      vpc_name      = "BlogDevOpsHub_VPC"
+    },
+  ]
+  
+# route_table inputs
+  route_table           = [ 
+    {
+      name              = "environment_RT"
+      route             = [ 
+        {
+          cidr_block    = "0.0.0.0/0"
+          gateway_name  = "IGW"
+        } 
+      ]
+    } 
+  ]
