@@ -234,3 +234,21 @@
       ]
     } 
   ]
+
+# ec2 instances input
+  ec2_instance = [
+    {
+      name                        = "ansible"
+      subnet_name                 = "ansible"
+      security_group_name         = [ "ansible_SG" ]
+      instance_type               = "t2.medium"
+      ami                         = "ami-0bb84b8ffd87024d8"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    }
+  ]

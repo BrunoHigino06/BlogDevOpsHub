@@ -93,3 +93,21 @@
       description = "Internet gateway variables"
       default = null
     }
+
+# ec2 instance vars
+variable "ec2_instance" {
+  type                          = list(object({
+    name                        = string
+    instance_type               = string
+    key_name                    = optional(string)
+    ami                         = optional(string)
+    associate_public_ip_address = optional(string)
+    subnet_name                 = optional(string)
+    security_group_name         = optional(list(string))
+    ebs_block_device            = optional(object({
+      volume_size               = string
+      volume_type               = string
+      device_name               = string
+    }))
+  }))
+}
