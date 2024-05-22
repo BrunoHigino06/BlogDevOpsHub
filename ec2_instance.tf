@@ -12,13 +12,15 @@ module "ec2_instance" {
         associate_public_ip_address         = ec2_instance.associate_public_ip_address
         subnet_name                         = ec2_instance.subnet_name
         security_group_name                 = ec2_instance.security_group_name
-        ebs_block_device                    = [
-           {
+        ebs_block_device                    = {
                 volume_size                 = ec2_instance.ebs_block_device.volume_size
                 volume_type                 = ec2_instance.ebs_block_device.volume_type
                 device_name                 = ec2_instance.ebs_block_device.device_name
             } 
-        ]
     }
+  ]
+  depends_on = [ 
+    module.security_group,
+    module.subnet
   ]
 }

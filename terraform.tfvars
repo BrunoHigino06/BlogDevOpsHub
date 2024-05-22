@@ -5,14 +5,14 @@
 
 # VPC inputs
   vpc             = {
-    name          = "BlogDevOpsHub_VPC"
+    name          = "BlogDevOpsHub"
     cidr_block    = "10.0.0.0/16"
   }
 
 # Subnet inputs
   subnet = [ 
     {
-      name              = "public_0"
+      name              = "public"
       cidr_block        = "10.0.0.0/24"
       availability_zone = "us-east-1a"
     },
@@ -46,8 +46,8 @@
 # Security group inputs
   security_group = [ 
     {
-      name = "public_SG"
-      description = "Security group for the EKS resources"
+      name = "public"
+      description = "Security group"
 
       egress = [ 
         {
@@ -68,8 +68,8 @@
       ]
     },
     {
-      name = "k8s_SG"
-      description = "Security group for the EKS resources"
+      name = "k8s"
+      description = "Security group"
 
       egress = [ 
         {
@@ -90,8 +90,8 @@
       ]
     },
     {
-      name = "gitlabCICD_SG"
-      description = "Security group for the EKS resources"
+      name = "gitlabCICD"
+      description = "Security group"
 
       egress = [ 
         {
@@ -112,8 +112,8 @@
       ]
     },
     {
-      name = "argoCD_SG"
-      description = "Security group for the EKS resources"
+      name = "argoCD"
+      description = "Security group"
 
       egress = [ 
         {
@@ -134,8 +134,8 @@
       ]
     },
     {
-      name = "ansible_SG"
-      description = "Security group for the EKS resources"
+      name = "ansible"
+      description = "Security group"
 
       egress = [ 
         {
@@ -156,8 +156,8 @@
       ]
     },
     {
-      name = "prometheus_SG"
-      description = "Security group for the EKS resources"
+      name = "prometheus"
+      description = "Security group"
 
       egress = [ 
         {
@@ -184,7 +184,7 @@
     {
       name = "network_acl"
       subnet_name = [ 
-        "public_0",
+        "public",
         "k8s",
         "gitlabCICD",
         "argoCD",
@@ -218,14 +218,14 @@
   internet_gateway  = [ 
     {
       name          = "IGW"
-      vpc_name      = "BlogDevOpsHub_VPC"
+      vpc_name      = "BlogDevOpsHub"
     },
   ]
   
 # route_table inputs
   route_table           = [ 
     {
-      name              = "environment_RT"
+      name              = "environment"
       route             = [ 
         {
           cidr_block    = "0.0.0.0/0"
@@ -235,14 +235,42 @@
     } 
   ]
 
+# route table association input
+  route_table_association = [
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "public"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "k8s"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "gitlabCICD"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "argoCD"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "ansible"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "prometheus"
+    },
+  ]
+
 # ec2 instances input
   ec2_instance = [
     {
-      name                        = "ansible"
-      subnet_name                 = "ansible"
-      security_group_name         = [ "ansible_SG" ]
+      name                        = "bastion"
+      subnet_name                 = "public"
+      security_group_name         = ["public"]
       instance_type               = "t2.medium"
-      ami                         = "ami-0bb84b8ffd87024d8"
+      ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
       ebs_block_device            = {
@@ -250,5 +278,89 @@
         volume_size               = "50"
         volume_type               = "gp3"
       }
-    }
+    },
+    {
+      name                        = "k8s_master"
+      subnet_name                 = "k8s"
+      security_group_name         = ["k8s"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
+      name                        = "k8s_node"
+      subnet_name                 = "k8s"
+      security_group_name         = ["k8s"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
+      name                        = "gitlabCICD"
+      subnet_name                 = "gitlabCICD"
+      security_group_name         = ["gitlabCICD"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
+      name                        = "argoCD"
+      subnet_name                 = "argoCD"
+      security_group_name         = ["argoCD"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
+      name                        = "ansible"
+      subnet_name                 = "ansible"
+      security_group_name         = ["ansible"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
+      name                        = "prometheus"
+      subnet_name                 = "prometheus"
+      security_group_name         = ["prometheus"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
   ]

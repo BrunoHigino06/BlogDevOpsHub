@@ -3,7 +3,6 @@ locals {
   dir_name = basename(local.full_module_path)
 }
 
-
 remote_state {
   backend = "s3"
   generate = {
@@ -11,7 +10,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket = "terraform-all-tfstates"
+    bucket = "terraform-all-tfstates-123456789"
     key = "${local.dir_name}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
