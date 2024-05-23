@@ -193,22 +193,22 @@
        ]
       egress = [
         {
-          protocol    = "tcp" 
+          protocol    = "-1" 
           rule_no     = "100"
           action      = "allow"
           cidr_block  = "0.0.0.0/0"
           from_port   = "0"
-          to_port     = "65535"
+          to_port     = "0"
         }
       ]
       ingress = [ 
         {
-          protocol    = "tcp" 
+          protocol    = "-1" 
           rule_no     = "100"
           action      = "allow"
           cidr_block  = "0.0.0.0/0"
           from_port   = "0"
-          to_port     = "65535"
+          to_port     = "0"
         } 
       ]
     } 
