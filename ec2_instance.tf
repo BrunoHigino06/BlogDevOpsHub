@@ -13,6 +13,7 @@ module "ec2_instance" {
         subnet_name                         = ec2_instance.subnet_name
         security_group_name                 = ec2_instance.security_group_name
         user_data                           = file(ec2_instance.user_data_file_name)
+        private_ip                          = ec2_instance.private_ip
         ebs_block_device                    = {
                 volume_size                 = ec2_instance.ebs_block_device.volume_size
                 volume_type                 = ec2_instance.ebs_block_device.volume_type

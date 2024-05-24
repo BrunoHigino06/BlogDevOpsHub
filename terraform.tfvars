@@ -287,6 +287,7 @@
       instance_type               = "t2.medium"
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
+      private_ip                  = "10.0.10.10"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
@@ -304,6 +305,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
+      private_ip                  = "10.0.10.20"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -319,6 +321,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
+      private_ip                  = "10.0.20.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -334,6 +337,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
+      private_ip                  = "10.0.30.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -364,6 +368,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
+      private_ip                  = "10.0.50.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
