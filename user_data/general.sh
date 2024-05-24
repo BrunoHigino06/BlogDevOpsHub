@@ -1,6 +1,13 @@
 #!/bin/bash
+######## update / upgrade ########
+# update
+sudo apt update
 
-##### mount the ebs volume########
+# upgrade
+sudo apt upgrade -y
+
+######## mount the ebs volume ########
+
 # directory to mount
 sudo mkdir -p /mnt/data
 

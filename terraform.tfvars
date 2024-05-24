@@ -273,7 +273,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -288,7 +288,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -303,7 +303,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -318,7 +318,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -333,7 +333,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -348,7 +348,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/ansible.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -363,7 +363,7 @@
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
-      user_data_file_name         = "user_data_script.sh"
+      user_data_file_name         = "./user_data/general.sh"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
