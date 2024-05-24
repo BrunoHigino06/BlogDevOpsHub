@@ -353,6 +353,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/ansible.sh"
+      private_ip                  = "10.0.40.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
