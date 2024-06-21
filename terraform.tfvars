@@ -373,3 +373,25 @@
   ]
 
 # db subnet group vars
+  db_subnet_group = [
+    {
+      name          = "db_subnet_group"
+      subnet_names  = ["database_1", "database_2"]
+    }
+  ]
+
+# db instance
+  db_instance = [ 
+    {
+      allocated_storage     = "10"
+      db_name               = "blogDB"
+      db_subnet_group_name  = "db_subnet_group"
+      engine                = "mydb"
+      engine_version        = "8.0"
+      instance_class        = "db.t3.micro"
+      name                  = "blogDB"
+      parameter_group_name  = "default.mysql8.0"
+      skip_final_snapshot   = "true"
+      username              = "admin"
+    } 
+  ]
