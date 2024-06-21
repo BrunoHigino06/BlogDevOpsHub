@@ -106,21 +106,45 @@
     } 
 
 # ec2 instance vars
-variable "ec2_instance" {
-  type                          = list(object({
-    name                        = string
-    instance_type               = string
-    key_name                    = optional(string)
-    ami                         = optional(string)
-    associate_public_ip_address = optional(string)
-    subnet_name                 = optional(string)
-    security_group_name         = optional(list(string))
-    user_data_file_name         = optional(string)
-    private_ip                  = optional(string)
-    ebs_block_device            = optional(object({
-      volume_size               = string
-      volume_type               = string
-      device_name               = string
+  variable "ec2_instance" {
+    type                          = list(object({
+      name                        = string
+      instance_type               = string
+      key_name                    = optional(string)
+      ami                         = optional(string)
+      associate_public_ip_address = optional(string)
+      subnet_name                 = optional(string)
+      security_group_name         = optional(list(string))
+      user_data_file_name         = optional(string)
+      private_ip                  = optional(string)
+      ebs_block_device            = optional(object({
+        volume_size               = string
+        volume_type               = string
+        device_name               = string
+      }))
     }))
+  }
+
+# db subnet group vars
+  variable "db_subnet_group" {
+    type                  = list(object({
+      name                = string
+      subnet_names        = list(string)
+    }))
+  }
+
+# db instance
+  variable "db_instance" {
+  type                      = list(object({
+    name                    = string
+    allocated_storage       = string
+    db_name                 = string
+    engine                  = string
+    engine_version          = string
+    instance_class          = string
+    username                = string
+    parameter_group_name    = string
+    skip_final_snapshot     = string
+    db_subnet_group_name    = string
   }))
 }

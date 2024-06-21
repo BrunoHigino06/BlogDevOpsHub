@@ -22,23 +22,28 @@
       availability_zone = "us-east-1a"
     },
     {
-      name              = "gitlabCICD"
+      name              = "CircleCI"
       cidr_block        = "10.0.20.0/24"
       availability_zone = "us-east-1a"
     },
     {
-      name              = "argoCD"
+      name              = "database_1"
       cidr_block        = "10.0.30.0/24"
       availability_zone = "us-east-1a"
     },
     {
-      name              = "ansible"
+      name              = "database_2"
       cidr_block        = "10.0.40.0/24"
+      availability_zone = "us-east-1b"
+    },
+    {
+      name              = "ansible"
+      cidr_block        = "10.0.50.0/24"
       availability_zone = "us-east-1a"
     },
     {
       name              = "prometheus"
-      cidr_block        = "10.0.50.0/24"
+      cidr_block        = "10.0.60.0/24"
       availability_zone = "us-east-1a"
     }
   ]
@@ -90,7 +95,7 @@
       ]
     },
     {
-      name = "gitlabCICD"
+      name = "CircleCI"
       description = "Security group"
 
       egress = [ 
@@ -112,7 +117,7 @@
       ]
     },
     {
-      name = "argoCD"
+      name = "database"
       description = "Security group"
 
       egress = [ 
@@ -186,8 +191,9 @@
       subnet_name = [ 
         "public",
         "k8s",
-        "gitlabCICD",
-        "argoCD",
+        "CircleCI",
+        "database_1",
+        "database_2",
         "ansible",
         "prometheus",
        ]
@@ -247,11 +253,15 @@
     },
     {
       route_table_unique_name = "environment"
-      subnet_unique_name      = "gitlabCICD"
+      subnet_unique_name      = "CircleCI"
     },
     {
       route_table_unique_name = "environment"
-      subnet_unique_name      = "argoCD"
+      subnet_unique_name      = "database_1"
+    },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "database_2"
     },
     {
       route_table_unique_name = "environment"
@@ -313,31 +323,15 @@
       }
     },
     {
-      name                        = "gitlabCICD"
-      subnet_name                 = "gitlabCICD"
-      security_group_name         = ["gitlabCICD"]
+      name                        = "CircleCI"
+      subnet_name                 = "CircleCI"
+      security_group_name         = ["CircleCI"]
       instance_type               = "t2.medium"
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
       private_ip                  = "10.0.20.10"
-      ebs_block_device            = {
-        device_name               = "/dev/sdf"
-        volume_size               = "50"
-        volume_type               = "gp3"
-      }
-    },
-    {
-      name                        = "argoCD"
-      subnet_name                 = "argoCD"
-      security_group_name         = ["argoCD"]
-      instance_type               = "t2.medium"
-      ami                         = "ami-04b70fa74e45c3917"
-      key_name                    = "test"
-      associate_public_ip_address = "true"
-      user_data_file_name         = "./user_data/general.sh"
-      private_ip                  = "10.0.30.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -377,3 +371,5 @@
       }
     },
   ]
+
+# db subnet group vars
