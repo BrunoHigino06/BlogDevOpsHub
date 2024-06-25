@@ -10,7 +10,7 @@ module "db_subnet_group" {
         tags         = var.tags
     }
   ]
-  depdepends_on = [
+  depends_on = [
     module.subnet
   ]  
 }

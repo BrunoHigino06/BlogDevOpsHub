@@ -143,6 +143,7 @@
     engine_version          = string
     instance_class          = string
     username                = string
+    identifier              = string
     parameter_group_name    = string
     skip_final_snapshot     = string
     db_subnet_group_name    = string

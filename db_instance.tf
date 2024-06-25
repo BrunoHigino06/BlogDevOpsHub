@@ -12,13 +12,14 @@ module "db_instance" {
         engine_version          = db_instance.engine_version
         instance_class          = db_instance.instance_class
         username                = db_instance.username
+        identifier              = db_instance.identifier
         parameter_group_name    = db_instance.parameter_group_name
         skip_final_snapshot     = db_instance.skip_final_snapshot
         db_subnet_group_name    = db_instance.db_subnet_group_name
         tags                    = var.tags
     }
   ]
-  depdepends_on = [
+  depends_on = [
     module.db_subnet_group
   ]  
 }
