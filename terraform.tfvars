@@ -27,14 +27,9 @@
       availability_zone = "us-east-1a"
     },
     {
-      name              = "database_1"
+      name              = "database"
       cidr_block        = "10.0.30.0/24"
       availability_zone = "us-east-1a"
-    },
-    {
-      name              = "database_2"
-      cidr_block        = "10.0.40.0/24"
-      availability_zone = "us-east-1b"
     },
     {
       name              = "ansible"
@@ -192,8 +187,7 @@
         "public",
         "k8s",
         "CircleCI",
-        "database_1",
-        "database_2",
+        "database",
         "ansible",
         "prometheus",
        ]
@@ -257,11 +251,7 @@
     },
     {
       route_table_unique_name = "environment"
-      subnet_unique_name      = "database_1"
-    },
-    {
-      route_table_unique_name = "environment"
-      subnet_unique_name      = "database_2"
+      subnet_unique_name      = "database"
     },
     {
       route_table_unique_name = "environment"
@@ -370,29 +360,4 @@
         volume_type               = "gp3"
       }
     },
-  ]
-
-# db subnet group vars
-  db_subnet_group = [
-    {
-      name          = "db_subnet_group"
-      subnet_names  = ["database_1", "database_2"]
-    }
-  ]
-
-# db instance
-  db_instance = [ 
-    {
-      allocated_storage     = "10"
-      db_name               = "blogDB"
-      db_subnet_group_name  = "db_subnet_group"
-      engine                = "mysql"
-      engine_version        = "8.0.35"
-      instance_class        = "db.t3.micro"
-      name                  = "blogDB"
-      identifier            = "blogdb"
-      parameter_group_name  = "default.mysql8.0"
-      skip_final_snapshot   = "true"
-      username              = "admin"
-    } 
   ]
