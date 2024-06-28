@@ -33,12 +33,12 @@
     },
     {
       name              = "ansible"
-      cidr_block        = "10.0.50.0/24"
+      cidr_block        = "10.0.40.0/24"
       availability_zone = "us-east-1a"
     },
     {
       name              = "prometheus"
-      cidr_block        = "10.0.60.0/24"
+      cidr_block        = "10.0.50.0/24"
       availability_zone = "us-east-1a"
     }
   ]
@@ -329,6 +329,22 @@
       }
     },
     {
+      name                        = "database"
+      subnet_name                 = "database"
+      security_group_name         = ["database"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      user_data_file_name         = "./user_data/database.sh"
+      private_ip                  = "10.0.30.10"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    },
+    {
       name                        = "ansible"
       subnet_name                 = "ansible"
       security_group_name         = ["ansible"]
@@ -337,7 +353,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/ansible.sh"
-      private_ip                  = "10.0.50.10"
+      private_ip                  = "10.0.40.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
@@ -353,7 +369,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
-      private_ip                  = "10.0.60.10"
+      private_ip                  = "10.0.50.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
