@@ -32,7 +32,7 @@ sudo apt-get install -y mysql-server
 sudo mysql
 
 # Update permissions
-ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '<password_here>';
 
 # Reread permissions
 FLUSH PRIVILEGES;
