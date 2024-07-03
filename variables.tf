@@ -6,9 +6,11 @@
 
 # VPC Vars
   variable "vpc" {
-    type          = object({
-      name        = string
-      cidr_block  = string
+    type                    = object({
+      name                  = string
+      cidr_block            = string
+      enable_dns_support    = string
+      enable_dns_hostnames  = string
     })
     description = "VPC variables"
   }
@@ -147,5 +149,7 @@
     parameter_group_name    = string
     skip_final_snapshot     = string
     db_subnet_group_name    = string
+    publicly_accessible     = string
+    security_group_name     = list(string)
   }))
 }

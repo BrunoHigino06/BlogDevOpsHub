@@ -10,7 +10,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket = "terraform-all-tfstates-4asdasdqsaqpfgxczmx"
+    bucket = "terraform-all-tfstates-4asdasaqpfgxczmx"
     key = "${local.dir_name}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true

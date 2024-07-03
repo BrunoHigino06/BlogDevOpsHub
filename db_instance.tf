@@ -16,10 +16,13 @@ module "db_instance" {
         parameter_group_name    = db_instance.parameter_group_name
         skip_final_snapshot     = db_instance.skip_final_snapshot
         db_subnet_group_name    = db_instance.db_subnet_group_name
+        publicly_accessible     = db_instance.publicly_accessible
+        security_group_name     = db_instance.security_group_name
         tags                    = var.tags
     }
   ]
   depends_on = [
-    module.db_subnet_group
+    module.db_subnet_group,
+    module.vpc
   ]  
 }

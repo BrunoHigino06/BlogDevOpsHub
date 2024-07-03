@@ -4,9 +4,11 @@
   }
 
 # VPC inputs
-  vpc             = {
-    name          = "BlogDevOpsHub"
-    cidr_block    = "10.0.0.0/16"
+  vpc                     = {
+    name                  = "BlogDevOpsHub"
+    cidr_block            = "10.0.0.0/16"
+    enable_dns_support    = "true"
+    enable_dns_hostnames  = "true"
   }
 
 # Subnet inputs
@@ -394,5 +396,7 @@
       parameter_group_name  = "default.mysql8.0"
       skip_final_snapshot   = "true"
       username              = "admin"
+      publicly_accessible   = "true"
+      security_group_name   = ["database"]
     } 
   ]
