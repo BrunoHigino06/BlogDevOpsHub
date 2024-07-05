@@ -1,4 +1,4 @@
-name: Terraform Deploy
+name: BlogDevOpsHub infrastruture Deploy
 
 on:
   workflow_dispatch:
