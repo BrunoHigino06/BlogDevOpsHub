@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  terraform-job:
+  BlogDevOpsHub-infrastructure-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Terragrunt Apply
         if: success() && github.event.inputs.approve == 'true'
-        uses: brunohigino06/terragrunt@main
+        uses: ./github-actions/terragrunt
         with:
           terragrunt-version: 'latest'
           command: 'apply'
