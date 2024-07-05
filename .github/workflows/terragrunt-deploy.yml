@@ -1,0 +1,42 @@
+name: Terraform Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Terragrunt Plan
+        id: terragrunt-plan
+        uses: brunohigino06/terragrunt@main
+        with:
+          terragrunt-version: 'latest'
+          command: 'plan'
+
+      - name: Wait for Manual Approval
+        if: success()
+        run: echo "Manual approval required to proceed."
+
+      - name: Terragrunt Apply
+        if: success() && github.event.inputs.approve == 'true'
+        uses: brunohigino06/terragrunt@main
+        with:
+          terragrunt-version: 'latest'
+          command: 'apply'
