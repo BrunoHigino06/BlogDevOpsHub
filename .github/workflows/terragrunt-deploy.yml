@@ -1,12 +1,7 @@
 name: Terraform Deploy
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   terraform-job:
@@ -25,7 +20,7 @@ jobs:
 
       - name: Terragrunt Plan
         id: terragrunt-plan
-        uses: brunohigino06/terragrunt@main
+        uses: ./github-actions/terragrunt
         with:
           terragrunt-version: 'latest'
           command: 'plan'
