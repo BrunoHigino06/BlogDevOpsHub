@@ -35,8 +35,7 @@ jobs:
         uses: docker://alpine/terragrunt:0.12.16
         with:
           entrypoint: /bin/bash
-          args: -c "cd /apps && \
-                    terragrunt plan --terragrunt-non-interactive"
+          args: -c "pwd"
 
   wait-for-approval:
     runs-on: ubuntu-latest
