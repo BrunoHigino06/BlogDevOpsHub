@@ -6,6 +6,7 @@ on:
 jobs:
   setup-aws:
     runs-on: ubuntu-latest
+    environment: aws-credentials
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
