@@ -35,7 +35,7 @@ jobs:
         id: terragrunt-plan
         uses: ./github-actions/terragrunt
         with:
-          command: 'plan'
+          command: plan
 
   wait-for-approval:
     runs-on: ubuntu-latest
@@ -56,4 +56,4 @@ jobs:
       - name: Terragrunt Apply
         uses: ./github-actions/terragrunt
         with:
-          command: 'apply'
+          command: apply
