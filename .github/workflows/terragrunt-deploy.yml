@@ -2,11 +2,6 @@ name: BlogDevOpsHub Workflow
 
 on:
   workflow_dispatch:
-    inputs:
-      approve:
-        description: 'Approve deployment'
-        required: false
-        default: 'false'
 
 jobs:
   setup-aws:
@@ -34,30 +29,14 @@ jobs:
           path: github-actions
 
       - name: Terragrunt Plan
-        id: terragrunt-plan
         uses: ./github-actions/terragrunt
         with:
           command: plan
 
-  wait-for-approval:
-    runs-on: ubuntu-latest
-    needs: terragrunt-plan
-    if: github.event_name == 'workflow_dispatch' || github.event.inputs.approve == 'true'
-    steps:
-      - name: Wait for Manual Approval
-        id: approval
-        run: |
-          if [ "${{ github.event.inputs.approve }}" == "true" ]; then
-            echo "Manual approval granted."
-          else
-            echo "::warning:: Manual approval is required. Click the 'Approve deployment' button to proceed."
-            exit 1
-          fi
-
   terragrunt-apply:
     runs-on: ubuntu-latest
-    needs: wait-for-approval
-    if: success() && (github.event_name == 'workflow_dispatch' || github.event.inputs.approve == 'true') && needs.wait-for-approval.result == 'success'
+    needs: terragrunt-plan
+    environment: terragrunt_apply
     steps:
       - name: Checkout terragrunt action
         uses: actions/checkout@v2
