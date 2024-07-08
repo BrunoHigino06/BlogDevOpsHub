@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: brunohigino06/github-actions
-          path: github-actions2
+          path: github-actions
 
       - name: Terragrunt Apply
         uses: ./github-actions/terragrunt
