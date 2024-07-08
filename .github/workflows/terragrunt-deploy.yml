@@ -32,10 +32,11 @@ jobs:
           path: github-actions
 
       - name: Terragrunt Plan
-        id: terragrunt-plan
-        uses: ./github-actions/terragrunt
+        uses: docker://alpine/terragrunt:0.12.16
         with:
-          command: plan
+          entrypoint: /bin/bash
+          args: -c "cd /apps && \
+                    terragrunt plan --terragrunt-non-interactive"
 
   wait-for-approval:
     runs-on: ubuntu-latest
