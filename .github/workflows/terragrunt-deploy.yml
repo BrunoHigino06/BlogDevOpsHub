@@ -24,6 +24,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: Checkout terragrunt action
+        uses: actions/checkout@v2
+        with:
+          repository: brunohigino06/github-actions
+          path: github-actions
 
       - name: Terragrunt Plan
         id: terragrunt-plan
