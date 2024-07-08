@@ -32,10 +32,9 @@ jobs:
           path: github-actions
 
       - name: Terragrunt Plan
-        uses: docker://alpine/terragrunt:0.12.16
+        uses: ./github-actions/terragrunt
         with:
-          entrypoint: /bin/bash
-          args: -c "pwd"
+          command: plan
 
   wait-for-approval:
     runs-on: ubuntu-latest
