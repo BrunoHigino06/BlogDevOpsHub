@@ -6,6 +6,7 @@ on:
 jobs:
   BlogDevOpsHub-infrastructure-job:
     runs-on: ubuntu-latest
+    environment: aws-credentials
 
     steps:
       - name: Checkout repository
