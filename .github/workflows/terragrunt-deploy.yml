@@ -28,6 +28,12 @@ jobs:
           repository: brunohigino06/github-actions
           path: github-actions
 
+      - name: Checkout BlogDevOpsHub repo
+        uses: actions/checkout@v2
+        with:
+          repository: brunohigino06/BlogDevOpsHub
+          path: BlogDevOpsHub
+          
       - name: Terragrunt Plan
         uses: ./github-actions/terragrunt
         with:
