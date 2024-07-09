@@ -57,7 +57,7 @@ jobs:
           repository: brunohigino06/BlogDevOpsHub
           path: BlogDevOpsHub
           
-      - name: Terragrunt Plan
+      - name: Terragrunt Apply
         uses: ./github-actions/terragrunt
         with:
-          command: plan
+          command: Apply
