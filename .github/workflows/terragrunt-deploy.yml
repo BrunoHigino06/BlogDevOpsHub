@@ -4,13 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup-aws:
+  terragrunt-plan:
     runs-on: ubuntu-latest
     environment: aws-credentials
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
+      
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -18,11 +16,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-  terragrunt-plan:
-    runs-on: ubuntu-latest
-    needs: setup-aws
-    environment: aws-credentials
-    steps:
       - name: Checkout terragrunt action
         uses: actions/checkout@v2
         with:
