@@ -153,13 +153,3 @@
     security_group_name     = list(string)
   }))
 }
-
-# Key Pair variable
-variable "key_pair" {
-    type              = list(object({
-      key_name        = string
-      algorithm       = string
-      rsa_bits        = string
-      file_permission = string
-    }))
-}
