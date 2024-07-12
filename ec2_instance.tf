@@ -23,6 +23,7 @@ module "ec2_instance" {
   ]
   depends_on = [ 
     module.security_group,
-    module.subnet
+    module.subnet,
+    module.key_pair
   ]
 }

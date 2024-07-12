@@ -275,6 +275,16 @@
     },
   ]
 
+# key pair
+  key_pair = [ 
+    {
+      key_name        = "test"
+      algorithm       = "RSA"
+      rsa_bits        = "4096"
+      file_permission = "0400"
+    } 
+  ]
+
 # ec2 instances input
   ec2_instance = [
     {
