@@ -35,6 +35,7 @@ jobs:
 
   approve:
     runs-on: ubuntu-latest
+    needs: terragrunt-plan
     environment: wait_approval
     steps:
       - name: Echo Step
@@ -42,7 +43,7 @@ jobs:
 
   terragrunt-apply:
     runs-on: ubuntu-latest
-    needs: terragrunt-plan
+    needs: approve
     environment: terragrunt
     steps:
       - name: Configure AWS Credentials
