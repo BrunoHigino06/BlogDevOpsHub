@@ -1,4 +1,4 @@
-name: BlogDevOpsHub Workflow
+name: BlogDevOpsHub Infrastructure
 
 on:
   workflow_dispatch:
