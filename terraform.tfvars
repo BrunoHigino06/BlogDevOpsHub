@@ -24,7 +24,7 @@
       availability_zone = "us-east-1a"
     },
     {
-      name              = "CircleCI"
+      name              = "GitActions"
       cidr_block        = "10.0.20.0/24"
       availability_zone = "us-east-1a"
     },
@@ -47,7 +47,12 @@
       name              = "prometheus"
       cidr_block        = "10.0.60.0/24"
       availability_zone = "us-east-1a"
-    }
+    },
+    {
+      name              = "vault"
+      cidr_block        = "10.0.70.0/24"
+      availability_zone = "us-east-1a"
+    },
   ]
 
 # Security group inputs
@@ -97,7 +102,7 @@
       ]
     },
     {
-      name = "CircleCI"
+      name = "GitActions"
       description = "Security group"
 
       egress = [ 
@@ -183,6 +188,28 @@
           cidr_blocks = ["0.0.0.0/0"]
         } 
       ]
+    },
+    {
+      name = "vault"
+      description = "Security group"
+
+      egress = [ 
+        {
+          from_port = "0"
+          to_port   = "0"
+          protocol  = "-1"
+          cidr_blocks = ["0.0.0.0/0"]
+        } 
+      ]
+
+      ingress = [ 
+        {
+          from_port = "0"
+          to_port   = "0"
+          protocol  = "-1"
+          cidr_blocks = ["0.0.0.0/0"]
+        } 
+      ]
     }
   ]
 
@@ -193,11 +220,12 @@
       subnet_name = [ 
         "public",
         "k8s",
-        "CircleCI",
+        "GitActions",
         "database_1",
         "database_2",
         "ansible",
         "prometheus",
+        "vault"
        ]
       egress = [
         {
@@ -255,7 +283,7 @@
     },
     {
       route_table_unique_name = "environment"
-      subnet_unique_name      = "CircleCI"
+      subnet_unique_name      = "GitActions"
     },
     {
       route_table_unique_name = "environment"
@@ -273,6 +301,10 @@
       route_table_unique_name = "environment"
       subnet_unique_name      = "prometheus"
     },
+    {
+      route_table_unique_name = "environment"
+      subnet_unique_name      = "vault"
+    }
   ]
 
 # ec2 instances input
@@ -325,9 +357,9 @@
       }
     },
     {
-      name                        = "CircleCI"
-      subnet_name                 = "CircleCI"
-      security_group_name         = ["CircleCI"]
+      name                        = "GitActions"
+      subnet_name                 = "GitActions"
+      security_group_name         = ["GitActions"]
       instance_type               = "t2.medium"
       ami                         = "ami-04b70fa74e45c3917"
       key_name                    = "test"
@@ -372,6 +404,22 @@
         volume_type               = "gp3"
       }
     },
+    {
+      name                        = "vault"
+      subnet_name                 = "vault"
+      security_group_name         = ["vault"]
+      instance_type               = "t2.medium"
+      ami                         = "ami-04b70fa74e45c3917"
+      key_name                    = "test"
+      associate_public_ip_address = "true"
+      user_data_file_name         = "./user_data/general.sh"
+      private_ip                  = "10.0.60.10"
+      ebs_block_device            = {
+        device_name               = "/dev/sdf"
+        volume_size               = "50"
+        volume_type               = "gp3"
+      }
+    }
   ]
 
 # db subnet group vars
