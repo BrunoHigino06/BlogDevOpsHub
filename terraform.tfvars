@@ -413,7 +413,7 @@
       key_name                    = "test"
       associate_public_ip_address = "true"
       user_data_file_name         = "./user_data/general.sh"
-      private_ip                  = "10.0.60.10"
+      private_ip                  = "10.0.70.10"
       ebs_block_device            = {
         device_name               = "/dev/sdf"
         volume_size               = "50"
